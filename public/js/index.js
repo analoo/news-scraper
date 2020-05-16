@@ -1,5 +1,7 @@
 $(function () {
 
+    // when news are clicked, a call is made to the NYT page
+
     $(document).on("click", "#stories", function () {
         $.ajax("/api/articles", {
             type: "GET"
@@ -11,6 +13,7 @@ $(function () {
         })
     })
 
+    // upon page load, the Get all Articles API is called and the response is used to render the page
     $.ajax("/api/articles/all", {
         type: "GET"
     })
@@ -64,6 +67,9 @@ $(function () {
             $("#headlines").append(LAS)}
         });
 
+    
+    // When a user adds a comment, a call is made to add the comment to that specific article and the inputed data is rendered on the page
+
     $(document).on("click", ".add-comment", function (event) {
         event.preventDefault();
         let id = $(this).data("id")
@@ -95,6 +101,8 @@ $(function () {
             console.log(err)
         })
     })
+
+    // When a user deletes a comment, a call is made to delete the comment to that specific article and the row of data is removed from display
 
     $(document).on("click", ".delete-button", function(event) {
         event.preventDefault();

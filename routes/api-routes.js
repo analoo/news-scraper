@@ -8,18 +8,19 @@ var cheerio = require("cheerio");
 
 module.exports = function (app) {
 
-app.get("/api/articles/all", (req,res) => {
+  // gets all articles
+  app.get("/api/articles/all", (req, res) => {
     db.Article.find({})
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.json(err);
-    });
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.json(err);
+      });
   });
 
 
-  // create comment
+  // creates comment for the provided article ID
   app.put("/api/articles/:id", (req, res) => {
     db.Article.findOneAndUpdate(
       { _id: req.params.id },
@@ -33,22 +34,22 @@ app.get("/api/articles/all", (req,res) => {
     });
   });
 
-  // create delete comment
+  // deletes a comment for the provided article using the article's id and the comment's id
   app.put("/api/articles/:id/remove", (req, res) => {
     console.log(res)
     db.Article.findOneAndUpdate(
       { _id: req.params.id },
-      { $pull: {  comments: {_id: req.body._id} }}, 
-      { safe: true, multi:true })
+      { $pull: { comments: { _id: req.body._id } } },
+      { safe: true, multi: true })
       .then(result => {
-      console.log(result)
-      res.json(result)
-    }).catch(err => {
-      res.json(err)
-    });
+        console.log(result)
+        res.json(result)
+      }).catch(err => {
+        res.json(err)
+      });
   });
 
-  //   creates multiple articles
+  //   creates multiple articles at once. Ideal for a scrape
   app.post("/api/article", (req, res) => {
     db.Article.insertMany(req.body)
       .then(result => {
@@ -58,6 +59,8 @@ app.get("/api/articles/all", (req,res) => {
         res.json(err);
       });
   })
+
+  // makes the request to the nytimes page for the scraping
 
   app.get("/api/articles", (req, res) => {
     axios.get("https://www.nytimes.com/")
