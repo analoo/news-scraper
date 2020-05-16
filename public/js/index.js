@@ -65,7 +65,7 @@ $(function () {
             let lastEl = array[array.length-1]
             $(`#comm-${id}`).val("");
             $(`#comments-${id}`).append(`<div class="card-body">
-        <p class="card-text">${comment.comment}<button id="del-comm-${lastEl}" data-id=${lastEl} class="delete-button">Delete</button></p> 
+        <p class="card-text">${comment.comment}<button id="del-comm-${lastEl._id}" data-id=${lastEl._id} class="delete-button">Delete</button></p> 
         </div>`
         )
 
@@ -73,6 +73,8 @@ $(function () {
             console.log(err)
         })
     })
+
+    // (document).om("click", ".delete")
 
    
 

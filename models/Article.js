@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ArticleSchema = new Schema({
-    headline: String,
+    headline: {type:String, unique:true, minlength:1},
     summary: String,
     URL: String,
     // photo: String,
