@@ -5,7 +5,7 @@ const ArticleSchema = new Schema({
     headline: String,
     summary: String,
     URL: String,
-    photo: String,
+    // photo: String,
     comments: [{
         comment: String
     }]
