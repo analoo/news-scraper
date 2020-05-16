@@ -6,30 +6,29 @@ mongoose.connect("mongodb://localhost/mongoHeadlines", {
   useFindAndModify: false
 });
 
-let articleSeed = [
-    {headline: "test headline",
-        summary: "summary",
-        URL: "hhtps/test",
-        comments: [{
-            comment: "That's awesome"
-        }]
-    },
-    {headline: "This is a great article",
-    summary: "massively lond description",
-    URL: "hhtps/test",
-    comments: [{
-        comment: "That's awesome"
-    }]
-}]
+// let articleSeed = [
+//     {headline: "test headline",
+//         summary: "summary",
+//         URL: "hhtps/test",
+//         comments: [{
+//             comment: "That's awesome"
+//         }]
+//     },
+//     {headline: "This is a great article",
+//     summary: "massively lond description",
+//     URL: "hhtps/test",
+//     comments: [{
+//         comment: "That's awesome"
+//     }]
+// }]
 
 db.Article.deleteMany({})
-  .then(() => db.Article.collection.insertMany(articleSeed))
+  // .then(() => db.Article.collection.insertMany(articleSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+    // console.log(data.result.n + " records inserted!");
     process.exit(0);
   })
   .catch(err => {
     console.error(err);
     process.exit(1);
   });
-

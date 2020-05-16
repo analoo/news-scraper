@@ -35,11 +35,12 @@ app.get("/api/articles/all", (req,res) => {
 
   // create delete comment
   app.put("/api/articles/:id/remove", (req, res) => {
+    console.log(res)
     db.Article.findOneAndUpdate(
       { _id: req.params.id },
-      { $pull: { _id: req.body } },
-      { new: true }
-    ).then(result => {
+      { $pull: {  comments: {_id: req.body._id} }}, 
+      { safe: true, multi:true })
+      .then(result => {
       console.log(result)
       res.json(result)
     }).catch(err => {
